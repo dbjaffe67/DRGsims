@@ -1,6 +1,7 @@
 # DRGsims
 
 Simulations from Han et. al doi: https://doi.org/10.1101/2021.07.14.452325
+david.jaffe@utsa.edu
 
 ----------------------------------------------------------
 
