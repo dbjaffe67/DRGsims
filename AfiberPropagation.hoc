@@ -14,7 +14,7 @@ STEMDIAM = 2                            // Stem axon diameter
 NSTEM = 4                               // Number of stem axon segments/internodes
 INODEL = 100                            // Stem axon internode distance
 
-INTERNODEDistance = 150.000000          // SR/DR internode distance 
+INTERNODEDistance = 150                 // SR/DR internode distance 
 NNODE = 120                             // Number of internodes in SR/DR axon
 
 TSTOP = 30
