@@ -7,19 +7,17 @@
 
 /////////////////////////// PARAMETERS
 
-GABAG = 0.0005
+GABAG = 0.0005      /// vary to adjust GABA-A receptor activation
 GNAB = 0.600000
 GK = .02     
 
 celsius = 37
 
-
 tstop = 50
-
 
 SG = 100            // number of segments
 dt = .025
-ISTEP = -.014*0		// -.058 gets every other one
+ISTEP = -.014*0		
 
 /////////////////   Morphology
 
@@ -57,21 +55,18 @@ tjcentral DRG.append()
 /////////////////////////// Channels
  
 forall {
-    insert ttxs
-    
-    gbar_ttxs = GNAB
-    
- //   insert borgkdr
- //   gkdrbar_borgkdr = GK
- 
-     insert kdrSheets
-        gbar_kdrSheets = GK
+	insert ttxs
+
+	gbar_ttxs = GNAB
+
+	insert kdrSheets
+	gbar_kdrSheets = GK
        
 	insert pas
 	g_pas = 1/10000
 	v = -60
-    
-    e_pas = v + (ina+ik)/g_pas
+
+	e_pas = v + (ina+ik)/g_pas
 
 	Ra = 100
 }
