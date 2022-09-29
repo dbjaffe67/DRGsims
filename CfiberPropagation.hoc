@@ -1,0 +1,119 @@
+//////////  C-fiber DRG Propagation Model
+//////////
+////////// Han et. al doi: https://doi.org/10.1101/2021.07.14.452325
+//////////
+//////////  June 6, 2022
+
+
+/////////////////////////// PARAMETERS
+
+GABAG = 0.0005
+GNAB = 0.600000
+GK = .02     
+
+celsius = 37
+
+
+tstop = 50
+
+
+SG = 100            // number of segments
+dt = .025
+ISTEP = -.014*0		// -.058 gets every other one
+
+/////////////////   Morphology
+
+create central, stem, peri, soma, tjperi, tjcentral	
+
+access central
+central {nseg=SG L=5000 diam = .4}
+tjperi  {nseg=SG L=500 diam = .8}
+tjcentral  {nseg=SG L=500 diam = .4}
+peri {nseg=SG L=5000 diam = .8}
+stem {nseg=SG L=75 diam = 1.35}
+soma {nseg=1 L=25 diam =25}
+
+
+peri connect tjperi(0),1
+tjperi connect tjcentral(0),1
+tjcentral connect central(0),1
+tjperi connect stem(0),1
+stem connect soma(0),1
+
+
+objref DRG, stim, imp   // objects
+
+////////////////////////// define DRG for GABA-A receptor expression
+
+
+DRG = new SectionList()
+
+soma DRG.append()
+stem DRG.append()
+tjperi DRG.append()
+tjcentral DRG.append()
+
+
+/////////////////////////// Channels
+ 
+forall {
+    insert ttxs
+    
+    gbar_ttxs = GNAB
+    
+ //   insert borgkdr
+ //   gkdrbar_borgkdr = GK
+ 
+     insert kdrSheets
+        gbar_kdrSheets = GK
+       
+	insert pas
+	g_pas = 1/10000
+	v = -60
+    
+    e_pas = v + (ina+ik)/g_pas
+
+	Ra = 100
+}
+
+
+//////////////////////////////  GABA-A expression and properties
+
+forsec DRG {
+
+    insert gaba
+    gbar_gaba = GABAG
+    erev_gaba = -40
+
+}
+
+/////////////////////////////  Stead-state GABA-A receptor activation
+
+
+t=0
+for i=0,1e4 fadvance()
+
+
+////////////////// Stimulate peripheral SR
+
+access peri
+stim = new IClamp(0)
+stim.del =5
+stim.dur= .5
+stim.amp = .2
+
+
+////////////////// Main simulation loop
+
+
+t=0
+wopen("output.dat")
+fprint("Time,Soma,SN,TJ,DR\n")
+while (t<tstop){
+
+    fprint("%g, %g, %g, %g, %g\n",t,soma.v,peri.v(.2), tjperi.v(1), central.v(.8))
+
+    fadvance()
+
+}
+
