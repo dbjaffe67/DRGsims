@@ -56,11 +56,11 @@ tjcentral DRG.append()
 /////////////////////////// Channels
  
 forall {
-	insert ttxs              // TTX-sensitive Na channel - after Sheets et al. 
+	insert ttxs              // TTX-sensitive Na channel - after 
 
-	gbar_ttxs = GNABAR
+	gbar_ttxs = GNABAR       // set maximum Na channel conductance
 
-	insert kdrSheets
+	insert kdrSheets             // K-delayed rectifier - after Sheets et al. 
 	gbar_kdrSheets = GKBAR
        
 	insert pas
