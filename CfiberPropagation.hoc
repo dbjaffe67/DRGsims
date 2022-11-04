@@ -7,15 +7,15 @@
 
 /////////////////////////// PARAMETERS
 
-GABAG = 0.0005      /// vary to adjust GABA-A receptor activation
-GNAB = 0.600000
-GK = .02     
+GABAG = 0.0005      // S/cm2 ---- vary to adjust GABA-A receptor conductance density
+GNABAR = 0.600000   // S/cm2 ---- maximum Na channel conductance  
+GKBAR = .02         // S/cm2 ---- maximum K channel conductance
 
 celsius = 37
 
 tstop = 50
 
-SG = 100            // number of segments
+SG = 100            // number of segments within each axon
 dt = .025
 ISTEP = -.014*0		
 
@@ -38,6 +38,7 @@ tjcentral connect central(0),1
 tjperi connect stem(0),1
 stem connect soma(0),1
 
+///////////////////////////
 
 objref DRG, stim, imp   // objects
 
@@ -55,12 +56,12 @@ tjcentral DRG.append()
 /////////////////////////// Channels
  
 forall {
-	insert ttxs
+	insert ttxs              // TTX-sensitive Na channel - after Sheets et al. 
 
-	gbar_ttxs = GNAB
+	gbar_ttxs = GNABAR
 
 	insert kdrSheets
-	gbar_kdrSheets = GK
+	gbar_kdrSheets = GKBAR
        
 	insert pas
 	g_pas = 1/10000
