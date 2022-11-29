@@ -16,5 +16,5 @@ david.jaffe@utsa.edu
   
 3. For either simulation, use the python script **plotVm.py** to display membrane potential in the Spinal Nerve or Dorsal Root axons, or the T-junction.
 
-4. For either simulation, vary GABAB (GABA-A receptor conductance) to vary the effect of GABA-A receptor activation on spike propagation.
+4. For either simulation, vary the parameter GABAG (GABA-A receptor conductance) to vary the effect of GABA-A receptor activation on spike propagation.
 
