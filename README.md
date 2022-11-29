@@ -1,7 +1,6 @@
 # DRGsims
 
-Simulations from Han et. al doi: https://doi.org/10.1101/2021.07.14.452325
-
+Simulation scripts from Han et. al to generate Figure 6G
 david.jaffe@utsa.edu
 
 ----------------------------------------------------------
