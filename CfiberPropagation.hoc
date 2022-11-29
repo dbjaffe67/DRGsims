@@ -35,7 +35,7 @@ soma {nseg=1 L=25 diam =25}
 peri connect tjperi(0),1
 tjperi connect tjcentral(0),1
 tjcentral connect central(0),1
-tjperi connect stem(0),1
+tjperi connect stem(0),1				// comment out to disconnect stem from TJ
 stem connect soma(0),1
 
 ///////////////////////////
@@ -45,7 +45,7 @@ objref DRG, stim, imp   // objects
 ////////////////////////// define DRG for GABA-A receptor expression
 
 
-DRG = new SectionList()
+DRG = new SectionList()  
 
 soma DRG.append()
 stem DRG.append()
